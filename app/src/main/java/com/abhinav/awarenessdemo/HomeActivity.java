@@ -6,9 +6,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.awareness.Awareness;
 import com.google.android.gms.awareness.snapshot.DetectedActivityResult;
+import com.google.android.gms.awareness.snapshot.HeadphoneStateResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallbacks;
 import com.google.android.gms.common.api.Status;
@@ -35,6 +37,32 @@ public class HomeActivity extends AppCompatActivity {
 
     private void initiateSnapshots(GoogleApiClient client) {
         detectUserActivity(client);
+        detectHeadfonesState(client);
+    }
+
+    private void detectHeadfonesState(GoogleApiClient googleApiClient) {
+        Awareness.SnapshotApi.getHeadphoneState(googleApiClient).setResultCallback(new ResultCallbacks<HeadphoneStateResult>() {
+            @Override
+            public void onSuccess(@NonNull HeadphoneStateResult headphoneStateResult) {
+                /*This callback is just providing the current state snapshot of the device*/
+
+                Log.d(TAG, "onSuccess: ");
+                Log.d(TAG, "Headphone state: " + headphoneStateResult.getHeadphoneState().toString());
+                int state = headphoneStateResult.getHeadphoneState().getState();
+
+                String str = (state == 1) ? "Yo Man play some music" : "Headphones unplugged";
+                notifyUser(str);
+            }
+
+            @Override
+            public void onFailure(@NonNull Status status) {
+                Log.e(TAG, "onFailure: " + status.toString());
+            }
+        });
+    }
+
+    private void notifyUser(String message) {
+        Toast.makeText(HomeActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 
     private void detectUserActivity(GoogleApiClient googleApiClient) {
