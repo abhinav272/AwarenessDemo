@@ -15,12 +15,15 @@ import com.google.android.gms.awareness.Awareness;
 import com.google.android.gms.awareness.snapshot.DetectedActivityResult;
 import com.google.android.gms.awareness.snapshot.HeadphoneStateResult;
 import com.google.android.gms.awareness.snapshot.LocationResult;
+import com.google.android.gms.awareness.snapshot.PlacesResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.ResultCallbacks;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceLikelihood;
 
 import java.util.List;
 
@@ -45,6 +48,52 @@ public class HomeActivity extends AppCompatActivity {
         detectUserActivity(client);
         detectHeadfonesState(client);
         detectLocation(client);
+        detectPlaces(client);
+    }
+
+    private void detectPlaces(GoogleApiClient googleApiClient) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            requestLocationPermissions();
+            return;
+        }
+        Awareness.SnapshotApi.getPlaces(googleApiClient).setResultCallback(new ResultCallback<PlacesResult>() {
+            @Override
+            public void onResult(@NonNull PlacesResult placesResult) {
+                Log.d(TAG, "onResult: ");
+                List<PlaceLikelihood> likelihoods = placesResult.getPlaceLikelihoods();
+                if (likelihoods == null) {
+                    return;
+                }
+                for (PlaceLikelihood p : likelihoods) {
+                    System.out.println("# Places API # Likelihood of the place is " + p.getLikelihood());
+                    Place place = p.getPlace();
+                    System.out.println("# Places API # Id " + place.getId());
+                    System.out.println("# Places API # Name " + place.getName());
+                    System.out.println("# Places API # Address " + place.getAddress());
+                    System.out.println("# Places API # Attributions " + place.getAttributions());
+                    System.out.println("# Places API # Place Locale " + place.getLocale());
+                    System.out.println("# Places API # Place Price Level " + place.getPriceLevel());
+                    System.out.println("# Places API # Place Rating " + place.getRating());
+                    if (place.getPlaceTypes() == null) {
+                        return;
+                    }
+                    for (Integer i : place.getPlaceTypes()) {
+                        System.out.println("    ## Place Type : " + i);
+                    }
+                }
+            }
+        });
+    }
+
+    private void requestLocationPermissions() {
+        ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQ_CODE);
     }
 
     private void detectLocation(GoogleApiClient googleApiClient) {
@@ -57,8 +106,7 @@ public class HomeActivity extends AppCompatActivity {
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
 
-            ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQ_CODE);
-
+            requestLocationPermissions();
             return;
         }
         Awareness.SnapshotApi.getLocation(googleApiClient).setResultCallback(new ResultCallback<LocationResult>() {
