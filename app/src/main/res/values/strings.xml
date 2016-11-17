@@ -2,4 +2,6 @@
     <string name="app_name">Awareness Demo</string>
     <string name="API_KEY">AIzaSyAThggdMRq9tSUNCHksVLED6o7ROT_16wo</string>
     <string name="weather_header">Weather :</string>
+    <string name="places_header">Places :</string>
+    <string name="location_header">Location :</string>
 </resources>

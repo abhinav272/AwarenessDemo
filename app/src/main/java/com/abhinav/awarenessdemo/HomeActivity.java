@@ -36,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
     private static final int LOCATION_REQ_CODE = 27;
-    private TextView tvWeather;
+    private TextView tvWeather, tvPlaces;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +50,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setUpUI() {
         tvWeather = (TextView) findViewById(R.id.tv_weather);
+        tvPlaces = (TextView) findViewById(R.id.tv_places);
 
     }
 
@@ -107,25 +108,28 @@ public class HomeActivity extends AppCompatActivity {
                 Log.d(TAG, "onResult: ");
                 List<PlaceLikelihood> likelihoods = placesResult.getPlaceLikelihoods();
                 if (likelihoods == null) {
+                    tvPlaces.setText("No Data Found :(");
                     return;
                 }
+                String s = "";
                 for (PlaceLikelihood p : likelihoods) {
-                    System.out.println("# Places API # Likelihood of the place is " + p.getLikelihood());
+                    s += ("# Places API # Likelihood of the place is " + p.getLikelihood());
                     Place place = p.getPlace();
-                    System.out.println("# Places API # Id " + place.getId());
-                    System.out.println("# Places API # Name " + place.getName());
-                    System.out.println("# Places API # Address " + place.getAddress());
-                    System.out.println("# Places API # Attributions " + place.getAttributions());
-                    System.out.println("# Places API # Place Locale " + place.getLocale());
-                    System.out.println("# Places API # Place Price Level " + place.getPriceLevel());
-                    System.out.println("# Places API # Place Rating " + place.getRating());
+                    s += ("# Places API # Id " + place.getId());
+                    s += ("# Places API # Name " + place.getName());
+                    s += ("# Places API # Address " + place.getAddress());
+                    s += ("# Places API # Attributions " + place.getAttributions());
+                    s += ("# Places API # Place Locale " + place.getLocale());
+                    s += ("# Places API # Place Price Level " + place.getPriceLevel());
+                    s += ("# Places API # Place Rating " + place.getRating());
                     if (place.getPlaceTypes() == null) {
                         return;
                     }
                     for (Integer i : place.getPlaceTypes()) {
-                        System.out.println("    ## Place Type : " + i);
+                        s += ("    ## Place Type : " + i);
                     }
                 }
+                tvPlaces.setText(s);
             }
         });
     }
