@@ -43,4 +43,24 @@
         android:textSize="16sp"
         android:layout_marginTop="5dp" />
 
+    <TextView
+        android:layout_below="@+id/tv_places"
+        android:id="@+id/tv_location_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/location_header"
+        android:textColor="@color/colorFont"
+        android:textStyle="bold"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_location_header"
+        android:textColor="@color/colorFont"
+        android:textSize="16sp"
+        android:layout_marginTop="5dp" />
+
 </RelativeLayout>

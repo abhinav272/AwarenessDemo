@@ -36,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
     private static final int LOCATION_REQ_CODE = 27;
-    private TextView tvWeather, tvPlaces;
+    private TextView tvWeather, tvPlaces, tvLocation;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +51,7 @@ public class HomeActivity extends AppCompatActivity {
     private void setUpUI() {
         tvWeather = (TextView) findViewById(R.id.tv_weather);
         tvPlaces = (TextView) findViewById(R.id.tv_places);
+        tvLocation = (TextView) findViewById(R.id.tv_location);
 
     }
 
@@ -155,6 +156,22 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onResult(@NonNull LocationResult locationResult) {
                 Log.d(TAG, "onResult: " + locationResult.getLocation().toString());
+                String s = "";
+                if (!locationResult.getStatus().isSuccess()) {
+                    return;
+                }
+
+                s += "Provider - " + locationResult.getLocation().getProvider() + "\n";
+                s += "Latitude - " + locationResult.getLocation().getLatitude() + "\n";
+                s += "Longitude - " + locationResult.getLocation().getLongitude() + "\n";
+                s += "Altitude - " + locationResult.getLocation().getAltitude() + "\n";
+                s += "Accuracy - " + locationResult.getLocation().getAccuracy() + "\n";
+                String temp = (locationResult.getLocation().getExtras()!=null)?
+                        locationResult.getLocation().getExtras().toString() : "No Data in Extras :(";
+                s += "Extras - " + temp + "\n";
+
+                tvLocation.setText(s);
+
             }
         });
     }
