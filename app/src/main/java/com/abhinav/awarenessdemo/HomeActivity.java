@@ -16,6 +16,7 @@ import com.google.android.gms.awareness.snapshot.DetectedActivityResult;
 import com.google.android.gms.awareness.snapshot.HeadphoneStateResult;
 import com.google.android.gms.awareness.snapshot.LocationResult;
 import com.google.android.gms.awareness.snapshot.PlacesResult;
+import com.google.android.gms.awareness.snapshot.WeatherResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.ResultCallbacks;
@@ -49,6 +50,30 @@ public class HomeActivity extends AppCompatActivity {
         detectHeadfonesState(client);
         detectLocation(client);
         detectPlaces(client);
+        detectWeather(client);
+    }
+
+    private void detectWeather(GoogleApiClient googleApiClient) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            requestLocationPermissions();
+            return;
+        }
+        Awareness.SnapshotApi.getWeather(googleApiClient).setResultCallback(new ResultCallback<WeatherResult>() {
+            @Override
+            public void onResult(@NonNull WeatherResult weatherResult) {
+                if (weatherResult.getStatus().isSuccess()) {
+                    Log.d(TAG, "onResult: Weather ");
+                    Log.d(TAG, "" + weatherResult.getWeather().toString());
+                }
+            }
+        });
     }
 
     private void detectPlaces(GoogleApiClient googleApiClient) {
