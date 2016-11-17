@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.awareness.Awareness;
@@ -35,14 +36,21 @@ public class HomeActivity extends AppCompatActivity {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
     private static final int LOCATION_REQ_CODE = 27;
+    private TextView tvWeather;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        setUpUI();
         GoogleApiClient client = setUpGoogleClient(this);
         initiateSnapshots(client);
+    }
+
+    private void setUpUI() {
+        tvWeather = (TextView) findViewById(R.id.tv_weather);
+
     }
 
     private void initiateSnapshots(GoogleApiClient client) {
@@ -71,6 +79,11 @@ public class HomeActivity extends AppCompatActivity {
                 if (weatherResult.getStatus().isSuccess()) {
                     Log.d(TAG, "onResult: Weather ");
                     Log.d(TAG, "" + weatherResult.getWeather().toString());
+                    String weathers = "Temp - " + weatherResult.getWeather().getTemperature(2) + "\n";
+                    weathers += "Humidity - " + weatherResult.getWeather().getHumidity() + "\n";
+                    weathers += "Dew - " + weatherResult.getWeather().getDewPoint(2);
+
+                    tvWeather.setText(weathers);
                 }
             }
         });
