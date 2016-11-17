@@ -4,4 +4,6 @@
     <string name="weather_header">Weather :</string>
     <string name="places_header">Places :</string>
     <string name="location_header">Location :</string>
+    <string name="headfone_header">Headfones Status :</string>
+    <string name="user_activity_header">User Activity</string>
 </resources>

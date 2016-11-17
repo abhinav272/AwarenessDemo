@@ -36,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
     private static final int LOCATION_REQ_CODE = 27;
-    private TextView tvWeather, tvPlaces, tvLocation;
+    private TextView tvWeather, tvPlaces, tvLocation, tvHeadfone, tvUserActivity, tvUserActivityMostProbabale;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +52,9 @@ public class HomeActivity extends AppCompatActivity {
         tvWeather = (TextView) findViewById(R.id.tv_weather);
         tvPlaces = (TextView) findViewById(R.id.tv_places);
         tvLocation = (TextView) findViewById(R.id.tv_location);
+        tvHeadfone = (TextView) findViewById(R.id.tv_headfone);
+        tvUserActivity = (TextView) findViewById(R.id.tv_user_activity);
+        tvUserActivityMostProbabale = (TextView) findViewById(R.id.tv_user_activity_most_probable);
 
     }
 
@@ -166,7 +169,7 @@ public class HomeActivity extends AppCompatActivity {
                 s += "Longitude - " + locationResult.getLocation().getLongitude() + "\n";
                 s += "Altitude - " + locationResult.getLocation().getAltitude() + "\n";
                 s += "Accuracy - " + locationResult.getLocation().getAccuracy() + "\n";
-                String temp = (locationResult.getLocation().getExtras()!=null)?
+                String temp = (locationResult.getLocation().getExtras() != null) ?
                         locationResult.getLocation().getExtras().toString() : "No Data in Extras :(";
                 s += "Extras - " + temp + "\n";
 
@@ -186,8 +189,8 @@ public class HomeActivity extends AppCompatActivity {
                 Log.d(TAG, "Headphone state: " + headphoneStateResult.getHeadphoneState().toString());
                 int state = headphoneStateResult.getHeadphoneState().getState();
 
-                String str = (state == 1) ? "Yo Man play some music" : "Headphones unplugged";
-                notifyUser(str);
+//                notifyUser((state == 1) ? "Yo Man play some music" : "Headphones unplugged");
+                tvHeadfone.setText((state == 1) ? "Yo Man play some music" : "Headphones unplugged");
             }
 
             @Override
@@ -206,15 +209,19 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onSuccess(@NonNull DetectedActivityResult detectedActivityResult) {
                 Log.d(TAG, "onSuccess: The probable Activities are : ");
+                String s = "";
                 ActivityRecognitionResult activityRecognitionResult = detectedActivityResult.getActivityRecognitionResult();
                 List<DetectedActivity> detectedActivities = activityRecognitionResult.getProbableActivities();
                 for (DetectedActivity a : detectedActivities) {
-                    System.out.println(" ## " + a.toString());
+                    s += ("## " + a.toString()) + "\n";
                 }
-
-                Log.d(TAG, "The Most probable activity for user is : " + activityRecognitionResult.getMostProbableActivity().toString());
+                tvUserActivity.setText(s);
+                Log.d(TAG, "The Most probable activity for user is : "
+                        + activityRecognitionResult.getMostProbableActivity().toString());
                 Log.d(TAG, "Elapsed Time is : " + activityRecognitionResult.getElapsedRealtimeMillis());
 
+                tvUserActivityMostProbabale.setText("The Most probable activity for user is : "
+                        + "\n" + activityRecognitionResult.getMostProbableActivity().toString());
             }
 
             @Override
