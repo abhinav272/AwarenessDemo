@@ -18,6 +18,7 @@ import com.google.android.gms.awareness.snapshot.HeadphoneStateResult;
 import com.google.android.gms.awareness.snapshot.LocationResult;
 import com.google.android.gms.awareness.snapshot.PlacesResult;
 import com.google.android.gms.awareness.snapshot.WeatherResult;
+import com.google.android.gms.awareness.state.Weather;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.ResultCallbacks;
@@ -84,9 +85,9 @@ public class HomeActivity extends AppCompatActivity {
                 if (weatherResult.getStatus().isSuccess()) {
                     Log.d(TAG, "onResult: Weather ");
                     Log.d(TAG, "" + weatherResult.getWeather().toString());
-                    String weathers = "Temp - " + weatherResult.getWeather().getTemperature(2) + "\n";
+                    String weathers = "Temp - " + weatherResult.getWeather().getTemperature(Weather.CELSIUS) + "\n";
                     weathers += "Humidity - " + weatherResult.getWeather().getHumidity() + "\n";
-                    weathers += "Dew - " + weatherResult.getWeather().getDewPoint(2);
+                    weathers += "Dew - " + weatherResult.getWeather().getDewPoint(Weather.CELSIUS);
 
                     tvWeather.setText(weathers);
                 }
