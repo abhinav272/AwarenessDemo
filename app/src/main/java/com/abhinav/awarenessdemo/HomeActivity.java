@@ -117,20 +117,20 @@ public class HomeActivity extends AppCompatActivity {
                 }
                 String s = "";
                 for (PlaceLikelihood p : likelihoods) {
-                    s += ("# Places API # Likelihood of the place is " + p.getLikelihood());
+                    s += ("# Places API # Likelihood of the place is " + p.getLikelihood()) + "\n";
                     Place place = p.getPlace();
-                    s += ("# Places API # Id " + place.getId());
-                    s += ("# Places API # Name " + place.getName());
-                    s += ("# Places API # Address " + place.getAddress());
-                    s += ("# Places API # Attributions " + place.getAttributions());
-                    s += ("# Places API # Place Locale " + place.getLocale());
-                    s += ("# Places API # Place Price Level " + place.getPriceLevel());
-                    s += ("# Places API # Place Rating " + place.getRating());
+                    s += ("# Places API # Id " + place.getId()) + "\n";
+                    s += ("# Places API # Name " + place.getName()) + "\n";
+                    s += ("# Places API # Address " + place.getAddress()) + "\n";
+                    s += ("# Places API # Attributions " + place.getAttributions()) + "\n";
+                    s += ("# Places API # Place Locale " + place.getLocale()) + "\n";
+                    s += ("# Places API # Place Price Level " + place.getPriceLevel()) + "\n";
+                    s += ("# Places API # Place Rating " + place.getRating()) + "\n";
                     if (place.getPlaceTypes() == null) {
                         return;
                     }
                     for (Integer i : place.getPlaceTypes()) {
-                        s += ("    ## Place Type : " + i);
+                        s += ("    ## Place Type : " + i + "\n");
                     }
                 }
                 tvPlaces.setText(s);
