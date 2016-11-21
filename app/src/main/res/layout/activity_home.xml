@@ -1,128 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingStart="16dp">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/header"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:text="Snapshot API Data :"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="16dp">
 
-
-    <TextView
-        android:layout_below="@+id/header"
-        android:id="@+id/tv_weather_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/weather_header"
-        android:textColor="@color/colorFont"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tv_weather"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_weather_header"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/colorFont"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/tv_places_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_weather"
-        android:layout_marginTop="10dp"
-        android:text="@string/places_header"
-        android:textColor="@color/colorFont"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tv_places"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_places_header"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/colorFont"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/tv_location_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_places"
-        android:layout_marginTop="10dp"
-        android:text="@string/location_header"
-        android:textColor="@color/colorFont"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tv_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_location_header"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/colorFont"
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Snapshot API Data :"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
-    <TextView
-        android:id="@+id/tv_headfone_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_location"
-        android:layout_marginTop="10dp"
-        android:text="@string/headfone_header"
-        android:textColor="@color/colorFont"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tv_weather_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header"
+            android:layout_marginTop="10dp"
+            android:text="@string/weather_header"
+            android:textColor="@color/colorFont"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv_headfone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_headfone_header"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/colorFont"
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/tv_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_weather_header"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/colorFont"
+            android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tv_user_activity_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_headfone"
-        android:layout_marginTop="10dp"
-        android:text="@string/user_activity_header"
-        android:textColor="@color/colorFont"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tv_places_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_weather"
+            android:layout_marginTop="10dp"
+            android:text="@string/places_header"
+            android:textColor="@color/colorFont"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv_user_activity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_user_activity_header"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/colorFont"
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/tv_places"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_places_header"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/colorFont"
+            android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tv_user_activity_most_probable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_user_activity"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/colorFont"
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/tv_location_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_places"
+            android:layout_marginTop="10dp"
+            android:text="@string/location_header"
+            android:textColor="@color/colorFont"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_location_header"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/colorFont"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/tv_headfone_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_location"
+            android:layout_marginTop="10dp"
+            android:text="@string/headfone_header"
+            android:textColor="@color/colorFont"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_headfone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_headfone_header"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/colorFont"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_user_activity_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_headfone"
+            android:layout_marginTop="10dp"
+            android:text="@string/user_activity_header"
+            android:textColor="@color/colorFont"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_user_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_user_activity_header"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/colorFont"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_user_activity_most_probable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_user_activity"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/colorFont"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+</ScrollView>
